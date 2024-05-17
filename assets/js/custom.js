@@ -506,7 +506,7 @@ $("#empTable").DataTable({
         method: "POST",
         data: $("#returnSell").serialize(),
         success: function(a) {
-            "yes" == $.trim(a) ? alert("Product return successfull") : alet(a)
+            "yes" == $.trim(a) ? alert("Product return successfull") : alert(a)
         }
     }) : alert("Your data are save")
 })), $("#EditaddNewRowBtn").on("click", (function(a) {

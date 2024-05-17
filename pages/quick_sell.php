@@ -82,7 +82,7 @@
                      </div>
                    </div>
                   </div>
-                 <div class="card p-4" style="background: #f1eaea40">
+                 <!-- <div class="card p-4" style="background: #f1eaea40">
                     <table>
                       <thead>
                         <th>#</th>
@@ -101,7 +101,7 @@
                   <div class="form-group text-right mt-3">
                      <button type="button" class="btn btn-primary pl-5 pr-5" id="addNewRowBtn">Add</button> 
                   </div>
-                 </div>
+                 </div> -->
                  <div class="invoice-area card pt-3" style="background: #f1eaea40">
                   <div class="row">
                     <div class="com-md-8 offset-md-2 col-lg-8 offset-lg-2">

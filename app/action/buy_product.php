@@ -82,7 +82,7 @@
 				// 'total_due' => $p_dueBill,
 			);
 
-			$suppliar_update_res = $obj->update('suppliar','id' , $p_supliar,$suppliar_update_query);
+			//$suppliar_update_res = $obj->update('suppliar','id' , $p_supliar,$suppliar_update_query);
 			if ($product_update_res) {
 				echo "yes";
 			}else{

@@ -1,4 +1,7 @@
 <!-- Content Wrapper. Contains page content  -->
+<?php
+session_start()
+?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -40,7 +43,7 @@
                   <div class="card-body">
                       <div class="row">
                        <div class="col-md-6 col-lg-6">
-                         
+                         <?php $_SESSION['invoice']=$sell_data->invoice_number;?>
                             <p class="m-0 p-0"><b><i>Sell information : </i></b></p>
                             <p class="m-0 p-0">customer name :<?=$sell_data->customer_name;?></p>
                             <p class="m-0 p-0">invoice ID :<?=$sell_data->invoice_number;?></p>
@@ -81,10 +84,11 @@
                         <td><b class="si_number">1</b></td>
                         <td>
                           <input type="text" readonly class="form-control form-control-sm pro_name" name="pro_name[]" id="pro_name" value="<?=$sell_row->product_name ?>">
-                          <input type="text" hidden="" name="pid[]" class="form-control form-control-sm" value="<?=$sell_row->pid ?>">
+                          <input type="text" hidden="" name="pid  []" class="form-control form-control-sm" value="<?=$sell_row->pid ?>">
+                   
                         </td>
                         <td><input type="text" class="form-control form-control-sm orderQty" placeholder="Order Quantity" name="orderQuantity[]" id="orderQuantity" readonly value="<?=$sell_row->issue_quantity;?>"></td>
-                          <td><input type="number" class="form-control form-control-sm returnQty" placeholder="Return Quantity" name="returnQty[]" value="0"></td>
+                          <td><input type="number" class="form-control form-control-sm returnQty" placeholder="Return Quantity" id="returnQty" name="returnQty[]" value="0"></td>
                         <td><input type="number" class="form-control form-control-sm sellPrice" placeholder="Price" name="sellPrice[]" id="sellPrice" value="<?=$sell_row->price;?>"></td>
                       
                     </tr>
@@ -131,7 +135,7 @@
                      </div>
                      
                      <div class="form-group text-center">
-                       <button type="submit" class="btn btn-success btn-block" id="returnSellBtn">Return sell</button>
+                       <button type="submit" class="btn btn-success btn-block" id="returnSellBtn">Return sell1234</button>
                      </div>
                     </div>
                   </div>

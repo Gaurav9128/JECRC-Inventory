@@ -8,7 +8,7 @@ if (isset($_POST['customer_name']) && isset($_POST['orderdate'])) {
     $find_customer_name = $find_customer_name->name;
     $orderdate = $obj->convertDateMysql($_POST['orderdate']);
 
-    $total_quantity = $_POST['total_quantity'];
+    //$total_quantity = $_POST['total_quantity'];
     $orderQuantity = $_POST['p_pn_quantity'];
     $pro_name = $_POST['product_name'];
     $find_pro_name = $obj->find('products', 'id', $pro_name);
