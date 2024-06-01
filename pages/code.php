@@ -1,59 +1,64 @@
 <?php
+session_start();
+// require_once '../app/init.php';
+$con = mysqli_connect("localhost", "root", "", "ample");
 
-require_once '../app/init.php';
+if(isset($_POST['save_multiple_data']))
+{
+    $product_names = $_POST['p_product_name'];
+    $purchase_dates = $_POST['puchar_date'];
+    $supplier_names = $_POST['p_supliar'];
+    $purchase_quantities = $_POST['p_pn_quantity'];
+    $Stock_quantites=$_POST['p_p_quantity'];
+    $Buy_Price=$_POST['p_p_price'];
+    $invoice=$_POST['in_name'];
 
-if (isset($_POST)) {
+    foreach ($product_names as $index => $product_name) {
+        $purchase_date = $purchase_dates[$index];
+        $supplier_name = $supplier_names[$index];
+        $Stock_quantity =$Stock_quantites[$index]; 
+        $purchase_quantity = $purchase_quantities[$index];
+        $purchase=$Buy_Price[$index];
+        $invoiceNumber=$invoice[$index];
+
+        $query2="select product_name from products where id=$product_name";
+        $query_run2 = mysqli_query($con, $query2);
+       
+        if ($query_run2) {
+            $row = mysqli_fetch_assoc($query_run2);
+            $product_name2 = $row['product_name'];
+        
+        $query = "INSERT INTO sample (product_id,product_name, purchase_date, supplier_name, prev_quantity, purchase_quantity, purchase_price, InvoiceNumber)VALUES('$product_name','$product_name2','$purchase_date', '$supplier_name',' $Stock_quantity',' $purchase_quantity','$purchase','$invoiceNumber')";
+        $query_run = mysqli_query($con, $query);
+        }
+
+    }
+
+    foreach ($product_names as $index => $product_name) {
     
-    //$product_id = $_POST['product_id'];
-    $product_name = $_POST['p_product_name'];
-    $purchase_date = $_POST['puchar_date'];
-    $supplier_name = $_POST['p_supliar'];
-    $prev_quantity = $_POST['p_p_quantity'];
-    $purchase_quantity = $_POST['p_pn_quantity'];
+        $purchase_quantity = $purchase_quantities[$index]; 
 
-    foreach ($product_name as $index => $p_product_name) {
-        //$s_product_id = $product_id[$index];
-        $s_product_name = $product_name[$index];
-        $s_purchase_date = $purchase_date[$index];
-        $s_supplier_name = $supplier_name[$index];
-        $s_prev_quantity = $prev_quantity[$index];
-        $s_purchase_quantity = $purchase_quantity[$index];
-
-        //echo "name is : " . $product_id;
-        echo "Product name is:" .  $p_product_name;
-        echo " n is:" .$s_purchase_date;
-
-        if (!empty($s_product_name) && !empty($s_purchase_date) && !empty($s_supplier_name) && !empty($s_prev_quantity) && !empty($s_purchase_quantity)) {
-            // Create the data array
-            $data = array(
-                'product_name' => $s_product_name,
-                'purchase_date' => $s_purchase_date,
-                'supplier_name' => $s_supplier_name,
-                'prev_quantity' => $s_prev_quantity,
-                'purchase_quantity' => $s_purchase_quantity,
-            );
-            
-            // Insert the data
-            $res = $obj->create('sample', $data);
-            if ($res) {
-                echo "yes";
-            } else {
-                echo "Failed to add product";
-            }
+        // Update the products table
+        $sql = "UPDATE products SET quantity = quantity +  $purchase_quantity WHERE id = $product_name";
+    
+        if ($con->query($sql) === TRUE) {
+            echo "Product with ID  updated successfully.<br>";
         } else {
-            echo "Please fill out all required fields";
+            echo "Error updating product with ID : " . $con->error . "<br>";
         }
     }
 
-    if ($res) {
+    if($query_run)
+    {
         $_SESSION['status'] = "Multiple Data Inserted Successfully";
-        header("Location: buy_product.php");
+        header("Location: http://localhost/ample/index.php?page=buy_product");
         exit(0);
-    } else {
+    }
+    else
+    {
         $_SESSION['status'] = "Data Not Inserted";
-        header("Location: buy_product.php");
+        //header("Location: insert-multiple-data.php");
         exit(0);
     }
 }
-
 ?>

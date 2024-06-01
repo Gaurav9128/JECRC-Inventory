@@ -1,0 +1,48 @@
+.row {
+    display: flex;
+    
+  }
+  
+  .col-md-4 {
+    flex: 0 0 32%; /* Adjust the percentage as per your requirement */
+    max-width: 32%; /* Adjust the percentage as per your requirement */
+    padding: 10px; /* Optional: Adds some spacing between columns */
+    box-sizing: border-box; /* Ensures padding does not affect the width */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-control:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
