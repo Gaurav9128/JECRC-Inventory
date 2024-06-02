@@ -70,7 +70,8 @@
 </div>
 <div class="card">
 	<div class="card-body">
-		<table class="table table-stripted">
+		<button id="exportButton" onclick="exportReportToExcel('xlsx','salesgross')" class="btn btn-outline-secondary">Export to Excel</button>
+		<table class="table table-stripted" id="salesgrossid">
 			<thead>
 				<th>#</th>
 				<th>Invoice number</th>
@@ -91,6 +92,18 @@
 </div>
 </section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+<script>
+  function exportReportToExcel(type, name,fn, dl) {
+ 
+var elt = document.getElementById('salesgrossid');
+var MySheetName = 'Sales_report';
+     var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+     return dl ?
+       XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+       XLSX.writeFile(wb, fn || (MySheetName+'.' + (type || 'xlsx')));
+}
+  </script>
           <!-- .content-wrapper -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

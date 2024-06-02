@@ -60,7 +60,7 @@ session_start()
                      <div class="col-md-6 col-lg-6">
                           <input type="text" hidden=""   name="return_id" value="<?=$reurn_id;?>">
                           <input type="text" hidden=""   name="customer_id" value="<?=$sell_data->customer_id;?>">
-                          <input type="text" hidden=""   name="customer_name" value="<?=$sell_data->customer_name;?>">    
+                          <input type="text" hidden=""   name="customer_name" value="<?=$sell_data->customer_name;?>">    <input type="text" hidden=""   name="email" value="<?=$sell_data->cust_email;?>">    
                      </div>
                    
                    </div>

@@ -32,12 +32,22 @@
             <form action="pages/code.php" method="POST" enctype="multipart/form-data">
               <div class="main-form mt-3 border-bottom">
                 <div class="row">
-                  <div class="col-md-4  ">
-                    <div class="form-group">
+                  <div class="col-md-12 row">
+                    <div class="form-group col-md-4">
                       <label for="p_supliar">Supplier Name *</label>
-                      <input type="text" class="form-control" name="p_supliar[]" placeholder="Supplier Name">
+                      <select name="p_supliar[]" class="form-control select2" id="sn">
+                        <option selected disabled>Select a Supplier</option>
+                        <?php
+                        $all_supplier = $obj->all('suppliar');
+                        foreach ($all_supplier as $supplier) {
+                        ?>
+                          <option value="<?= $supplier->id ?>"><?= $supplier->company ?></option>
+                        <?php
+                        }
+                        ?>
+                      </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group  col-md-4">
                       <label for="p_product_name">Purchase Product *</label>
                       <select name="p_product_name[]" class="form-control form-control-sm select2 product-select">
                         <option selected disabled>Select a product</option>
@@ -53,21 +63,22 @@
                       <label for="p_p_quantity">Stock Quantity *</label>
                       <input type="number" class="form-control stock-quantity" name="p_p_quantity[]" placeholder="Stock quantity">
                     </div> -->
-                    <div class="form-group">
+                    <div class="form-group  col-md-4">
                       <label for="p_p_price">Buy Price *</label>
                       <input type="number" class="form-control" name="p_p_price[]" placeholder="Purchase price">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group  col-md-4">
                       <label for="p_pn_quantity">Purchase Quantity *</label>
                       <input type="number" class="form-control" name="p_pn_quantity[]" placeholder="Purchase quantity">
                     </div>
-                    <label for="puchar_date">Purchase Date *</label>
-                    <div class="form-group">
-                      <input type="text" class="form-control datepicker" name="puchar_date[]">
+                    
+                    <div class="form-group  col-md-4">
+						<label for="puchar_date">Purchase Date *</label>
+                      <input type="text" class="form-control datepicker" name="puchar_date[]" id="pd">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group  col-md-4">
                       <label for="sup_name">Invoice Number *</label>
-                      <input type="text" class="form-control" placeholder="Invoice Number" name="in_name[]">
+                      <input type="text" class="form-control" placeholder="Invoice Number" name="in_name[]" id="invoice">
                     </div>
                   </div>
                 </div>
@@ -118,15 +129,18 @@
     });
 
     $(document).on('click', '.add-more-form', function() {
+		var sn=$('#sn option:selected').text();
+		var pd=document.getElementById("pd").value;
+		var invoice=document.getElementById("invoice").value;
       $('.paste-new-forms').append(`
         <div class="main-form mt-3 border-bottom">
           <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
+            <div class="col-md-12 row">
+              <div class="form-group col-md-4">
                 <label for="p_supliar">Supplier Name *</label>
-                <input type="text" class="form-control" name="p_supliar[]" placeholder="Supplier Name">
+                <input type="text" class="form-control" name="p_supliar[]" placeholder="Supplier Name" value="`+sn+`">
               </div>
-              <div class="form-group">
+              <div class="form-group col-md-4">
                 <label for="p_product_name">Purchase Product *</label>
                 <select name="p_product_name[]" class="form-control form-control-sm select2 product-select">
                   <option selected disabled>Select a product</option>
@@ -139,25 +153,25 @@
                 </select>
               </div>
              
-              <div class="form-group">
+              <div class="form-group col-md-4">
                 <label for="p_p_price">Buy Price *</label>
                 <input type="number" class="form-control" name="p_p_price[]" placeholder="Purchase price">
               </div>
-              <div class="form-group">
+              <div class="form-group col-md-4">
                 <label for="p_pn_quantity">Purchase Quantity *</label>
                 <input type="number" class="form-control" name="p_pn_quantity[]" placeholder="Purchase quantity">
               </div>
+              <div class="form-group col-md-4">
               <label for="puchar_date">Purchase Date *</label>
-              <div class="form-group">
-                <input type="text" class="form-control datepicker" name="puchar_date[]" placeholder="Purchase Date">
+                <input type="text" class="form-control datepicker" name="puchar_date[]" placeholder="Purchase Date" value="`+pd+`">
               </div>
-              <div class="form-group">
+              <div class="form-group col-md-4">
                 <label for="sup_name">Invoice Number *</label>
-                <input type="text" class="form-control" placeholder="Invoice Number" name="in_name[]">
+                <input type="text" class="form-control" placeholder="Invoice Number" name="in_name[]" value="`+invoice+`">
               </div>
-              <button type="button" class="remove-btn btn btn-danger mt-3">Remove</button>
             </div>
           </div>
+<button type="button" class="remove-btn btn btn-danger mt-3">Remove</button>
         </div>
       `);
     });

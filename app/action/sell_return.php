@@ -1,10 +1,11 @@
 <?php
-
-// Assuming you have already included/initiated the necessary connections, functions, and objects
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 require_once '../init.php';
 
 if (isset($_POST)) {
     $customer_id = $_POST['customer_id'];
+    $email = $_POST['email'];
     $customer_name = $_POST['customer_name'];
     $invoice_id = $_SESSION['invoice'];
     $pro_name = $_POST['pro_name'][0];
@@ -29,7 +30,38 @@ if (isset($_POST)) {
 
     // Get the last insert ID
     $return_no = $pdo->lastInsertId();
+?>
+<?php
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
 
+  $mail = new PHPMailer(true);
+
+    //Server settings
+    $mail->isSMTP();                              //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';       //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;             //Enable SMTP authentication
+    $mail->Username   = 'gjain212000@gmail.com';   //SMTP write your email
+    $mail->Password   = 'slol uogt nukk gfku';      //SMTP password
+    $mail->SMTPSecure = 'ssl';            //Enable implicit SSL encryption
+    $mail->Port       = 465;                                    
+
+    //Recipients
+    $mail->setFrom( $email, $customer_name); // Sender Email and name
+    $mail->addAddress($email);     //Add a recipient email  
+    $mail->addReplyTo($email, $customer_name); // reply to sender email
+$msg="Name:".$customer_name."<br> Return date:".$return_date."<br>Product Name:".$pro_name."<br>Return Quantity:".$returnQty."<br>Sell Price:".$sellPrice;
+    //Content
+    $mail->isHTML(true);               //Set email format to HTML
+    $mail->Subject = "Return sales";   // email subject headings
+    $mail->Body    =$msg; //email message
+
+    // Success sent message alert
+    $mail->send();
+   
+?>
+<?php
     // Check if insertion was successful
     if ($return_no) {
         echo "Sell return record inserted successfully with ID: $return_no";

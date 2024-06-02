@@ -48,7 +48,7 @@
                           }
                          ?>
                       </select>
-                    </div>
+			      </div>
                           
                         </div>
                      <div class="col-md-6 col-lg-6">
@@ -67,7 +67,7 @@
 
                           foreach ($all_product as $product) {
                             ?>
-                              <option value="<?=$product->id;?>"><?=$product->product_name;?></option>
+                              <option value="<?=$product->id;?>"><?=$product->product_name;?> ( <?=$product->brand_name;?> )</option>
                             <?php 
                           }
                          ?>
@@ -79,6 +79,10 @@
                       <label for="quantity">issue Quantity</label>
                        
                        <input type="number" class="form-control" id="p_pn_quantity" name="p_pn_quantity" placeholder="issue quantity">
+                     </div>
+					    <div class="col-md-12 col-lg-12 mb-5">
+                      <label for="quantity">Product Discripssion</label>             
+                       <textarea class="form-control" name="dis"></textarea>
                      </div>
                    </div>
                   </div>
@@ -197,9 +201,11 @@
                      </div>
                      <div class="form-group text-center">
                        <button type="submit" class="btn btn-success btn-block" id="sellBtn">Make sell</button>
+<!--
                        <a href="http://localhost/ample/sample/index.php" style="text-decoration:none; ">
                        <div style="color: black; padding-top: 5px;">Send Email</div>
                       </a>
+-->
                        
                      </div>
                     </div>
@@ -212,4 +218,5 @@
           </section>
           <!-- /.content -->
         </div>
-        <!-- /.content-wrapper
+        <!-- /.content-wrapper-->
+
